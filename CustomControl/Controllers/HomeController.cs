@@ -16,8 +16,9 @@ namespace CustomControl.Controllers
 
         public ActionResult Index()
         {
-            var sReader = new StreamReader(Server.MapPath("~/App_Data/temp.xml"));
-            var timeLineList = _intervalsService.TimeLineSerializer(sReader);
+            //var v = XmlTemp();
+            //var sReader = new StreamReader(Server.MapPath("~/App_Data/temp.xml"));
+            var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());
 
             //timeLineList.Add(new TimeLine
             //{
@@ -29,6 +30,20 @@ namespace CustomControl.Controllers
             //});
             //timeLineList.Add();
             return View("Template", timeLineList);
+        }
+
+        public string XmlTemp()
+        {
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                    "XmlTemp");
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                    ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
 
         public ActionResult About()

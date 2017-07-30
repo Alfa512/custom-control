@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Serialization;
 using CustomControl.Models;
 
@@ -30,7 +31,7 @@ namespace CustomControl.Services
             return timeInterval;
         }
 
-        public List<TimeLine> TimeLineSerializer(StreamReader sReader)
+        public List<TimeLine> TimeLineSerializer(string text)
         {
             const string path = "C:\\Source\\custom-control\\CustomControl\\Templates\\temp.xml";
 
@@ -40,9 +41,10 @@ namespace CustomControl.Services
 
             var serializer = new XmlSerializer(typeof(TimeLineCollection));
 
-            var reader = sReader;//new StreamReader(path);
+            //var reader = sReader;//new StreamReader(path);
+            var textReader = new StringReader(text);
             //reader.BaseStream.Seek(0, SeekOrigin.Begin);
-            var timeLine = (TimeLineCollection)serializer.Deserialize(reader);
+            var timeLine = (TimeLineCollection)serializer.Deserialize(textReader);
             if (timeLine?.TimeLines != null && timeLine.TimeLines.Any())
             {
                 foreach (var line in timeLine.TimeLines)
@@ -52,7 +54,7 @@ namespace CustomControl.Services
             }
             //reader.BaseStream.Seek(0, SeekOrigin.Begin);
             //var timeLine2 = (TimeLineCollection)serializer.Deserialize(reader);
-            reader.Close();
+            //reader.Close();
             return timeLine?.TimeLines?.ToList();
         }
     }
