@@ -16,7 +16,7 @@ namespace CustomControl.Controllers
 
         public ActionResult Index()
         {
-            var sReader = new StreamReader(HttpContext.Request.PhysicalApplicationPath + "/Content/temp.xml");
+            var sReader = new StreamReader(Server.MapPath("~/App_Data/temp.xml"));
             var timeLineList = _intervalsService.TimeLineSerializer(sReader);
 
             //timeLineList.Add(new TimeLine
