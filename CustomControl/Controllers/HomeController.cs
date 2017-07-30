@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Web.Mvc;
-using CustomControl.Models;
+using CustomControl.Models.ViewModel;
 using CustomControl.Services;
 
 namespace CustomControl.Controllers
@@ -20,16 +19,18 @@ namespace CustomControl.Controllers
             //var sReader = new StreamReader(Server.MapPath("~/App_Data/temp.xml"));
             var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());
 
-            //timeLineList.Add(new TimeLine
-            //{
-            //    TimeInterval = _intervalsService.TimeIntervalResolver("6:30", "22:30", 15),
-            //    From = "6:30",
-            //    Until = "21:30",
-            //    IntervalMinutes = 15,
-            //    SwimmingPools = new List<SwimmingPool>()
-            //});
-            //timeLineList.Add();
             return View("Template", timeLineList);
+        }
+
+        public ActionResult SwimmingPoolTablePart(int swimLinesCount, int timeIntervalsCount, int currentSwmPool)
+        {
+            var poolTablePartModel = new PoolTablePartVm
+            {
+                SwimLinesCount = swimLinesCount,
+                TimeIntervalsCount = timeIntervalsCount,
+                CurrentSwmPool = currentSwmPool
+            };
+            return View("_SwimmingPoolTablePart", poolTablePartModel);
         }
 
         public string XmlTemp()

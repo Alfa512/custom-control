@@ -1,0 +1,15 @@
+﻿@model CustomControl.Models.ViewModel.PoolTablePartVm
+
+@{
+    Layout = null;
+}
+
+@for (var i = 0; i < Model.TimeIntervalsCount; i++)
+{
+    <tr id="swm-@Model.CurrentSwmPool">
+        @for (var j = 0; j < Model.SwimLinesCount; j++)
+        {
+            <td id="in-@i-sline-@j"></td>
+        }
+    </tr>
+}
