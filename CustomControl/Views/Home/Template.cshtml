@@ -1,0 +1,73 @@
+﻿@model List<CustomControl.Models.TimeLine>
+
+@{
+    ViewBag.Title = "Template";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (var timeline in Model)
+{
+    <div class="row">
+        <div class="col">
+            <table class="table table-responsive">
+                <tbody class="">
+                    <tr class="">
+                        <th>Wasserzeit</th>
+                    </tr>
+                    <tr class="">
+                        <th>von</th>
+                        <th>bis</th>
+                    </tr>
+
+                    @foreach (var interval in timeline.TimeInterval.IntervalList)
+                    {
+                        <tr class="">
+                            <td>@interval.From</td>
+                            <td>@interval.Until</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        @if (timeline.SwimmingPools.Any())
+        {
+            var i = 0;
+
+            foreach (var swimmingPool in timeline.SwimmingPools)
+            {
+                i++;
+                <div class="col">
+                    <div class="table table-responsive">
+                        @*<tbody class="">*@
+                            <div class="row">
+                                <b>Becken - @i</b>
+                            </div>
+                            <div class="row">
+                                @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
+                                {
+                                    <div class="col">@j</div>
+                                }
+                            </div>
+                            @foreach (var line in swimmingPool.SwimLines)
+                            {
+                                
+                                <div class="col">
+                                    @foreach (var item in line.SwimLineItems)
+                                    {
+                                        <div class="row">
+                                            
+                                            @item.Value
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                        @*</tbody>*@
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}

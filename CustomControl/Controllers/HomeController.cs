@@ -1,16 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
+using CustomControl.Models;
+using CustomControl.Services;
 
-namespace CustomСontrol.Controllers
+namespace CustomControl.Controllers
 {
     public class HomeController : Controller
     {
+        private TimeIntervalsService _intervalsService;
+        public HomeController()
+        {
+            _intervalsService = new TimeIntervalsService();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var sReader = new StreamReader(HttpContext.Request.PhysicalApplicationPath + "/Content/temp.xml");
+            var timeLineList = _intervalsService.TimeLineSerializer(sReader);
+
+            //timeLineList.Add(new TimeLine
+            //{
+            //    TimeInterval = _intervalsService.TimeIntervalResolver("6:30", "22:30", 15),
+            //    From = "6:30",
+            //    Until = "21:30",
+            //    IntervalMinutes = 15,
+            //    SwimmingPools = new List<SwimmingPool>()
+            //});
+            //timeLineList.Add();
+            return View("Template", timeLineList);
         }
 
         public ActionResult About()
