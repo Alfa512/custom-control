@@ -10,5 +10,7 @@ namespace CustomControl.Models
         //[XmlArray("swimmingpool")]
         [XmlElement("swimlines", typeof(SwimLine))]
         public List<SwimLine> SwimLines { get; set; }
+
+        //public List<List<SwimLineItem>>;
     }
 }

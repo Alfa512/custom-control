@@ -1,27 +1,25 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-.table-left {
-    float: left;
+﻿
+.swm-1 td {
+    height: 37px !important;
 }
 
 table thead tr:first-child th {
     border-bottom: 0;
+}
+
+.table.table-responsive td {
+    height: 37px;
+}
+
+.col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-8, .col-md-9, .col-md-12 {
+    padding: 0;
+}
+
+.table-wrapper {
+    width: 100%;
+    float: left;
+}
+
+.tb2 th {
+    width: 100px;
 }
