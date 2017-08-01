@@ -28,6 +28,7 @@ namespace CustomСontrol
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/XmlTemplate.css",
                       "~/Content/site.css"));
         }
     }

@@ -16,14 +16,14 @@
         <div class="col-md-6">
             <table class="table table-responsive table-left">
                 <thead>
-                <tr>
-                    <th>Wasserzeit</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th>von</th>
-                    <th>bis</th>
-                </tr> 
+                    <tr>
+                        <th>Wasserzeit</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>von</th>
+                        <th>bis</th>
+                    </tr> 
                 </thead>
 
                 <tbody>
@@ -49,24 +49,24 @@
                 <div class="col-md-6">
                     <table class="table table-responsive table-left">
                         <thead>
-                        <tr>
-                            <th>Becken - @i</th>
-                            @*<th></th>
+                            <tr>
+                                <th>Becken - @i</th>
+                                @*<th></th>
                                 <th></th>
                                 <th></th>*@
-                        </tr>
+                            </tr>
                        
-                        <tr>
-                            @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
-                            {
-                                <th class="col">@j</th>
-                            }
-                        </tr>
+                            <tr>
+                                @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
+                                {
+                                    <th class="col">@j</th>
+                                }
+                            </tr>
                         </thead>
                         <tbody>
                        
                         @{
-                Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary {{"swimLinesCount", swimmingPool.SwimLines.Count}, {"timeIntervalsCount", timeline.TimeInterval.IntervalList.Count}, {"currentSwmPool", i}});
+                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary {{"swimLinesCount", swimmingPool.SwimLines.Count}, {"timeIntervalsCount", timeline.TimeInterval.IntervalList.Count}, {"currentSwmPool", i}});
                         }
                         @for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
                         {
@@ -87,18 +87,18 @@
                         </tbody>
                     </table>
                 </div>
-            }
-        }
+                                    }
+                                }
     </div>
-}   
+                                }   
 @section scripts
 {
     <script>
         @{
-                                var sett = new JsonSerializerSettings();
-                                sett.Culture = CultureInfo.CurrentCulture;
-                                //sett.
-                                var json = JsonConvert.SerializeObject(poolTableList.ToArray(), sett);
+            var sett = new JsonSerializerSettings();
+            sett.Culture = CultureInfo.CurrentCulture;
+            //sett.
+            var json = JsonConvert.SerializeObject(poolTableList.ToArray(), sett);
         }
         //var arrayOfArrays = JSON.parse(Html.Raw(poolTableList).ToString());
         initToPoolTable("@json");
