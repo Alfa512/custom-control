@@ -11,6 +11,6 @@ namespace CustomControl.Models
         [XmlElement("swimlines", typeof(SwimLine))]
         public List<SwimLine> SwimLines { get; set; }
 
-        //public List<List<SwimLineItem>>;
+        public List<List<SwimLineItem>> SwimLinesList { get; set; }
     }
 }

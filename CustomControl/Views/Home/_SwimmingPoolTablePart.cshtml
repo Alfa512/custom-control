@@ -1,10 +1,9 @@
-﻿@model CustomControl.Models.ViewModel.PoolTablePartVm
+﻿@model CustomControl.Models.SwimmingPool
 
 @{
     Layout = null;
 }
-
-@for (var i = 0; i < Model.TimeIntervalsCount; i++)
+@*@foreach(var swimLineItems in Model.SwimLinesList.Select((value, i) => new { i, value }).OrderByDescending(r => r.i))
 {
     <tr id="swm-@Model.CurrentSwmPool">
         @for (var j = 0; j < Model.SwimLinesCount; j++)
@@ -12,4 +11,16 @@
             <td id="in-@i-sline-@j"></td>
         }
     </tr>
-}
+}*@
+
+@foreach(var swimLineItems in Model.SwimLinesList)
+    {
+        <tr>
+        @foreach (var lineItem in swimLineItems)
+        {
+                <td>
+                    @lineItem.Value
+                </td>
+        }
+        </tr>
+    }

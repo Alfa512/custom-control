@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using CustomControl.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace CustomControl.Services
 {
@@ -18,9 +19,9 @@ namespace CustomControl.Services
             splitHourMinute[0] = until.Split(':')[0];
             splitHourMinute[1] = until.Split(':')[1];
             var untilTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(splitHourMinute[0]), Convert.ToInt32(splitHourMinute[1]), 0);
-            timeInterval.TotalMinutes= (untilTime.Hour - fromTime.Hour) * 60 - fromTime.Minute + untilTime.Minute;
+            timeInterval.TotalMinutes = (untilTime.Hour - fromTime.Hour) * 60 - fromTime.Minute + untilTime.Minute;
             timeInterval.IntervalList = new List<WaterTime>();
-            for (var i = 0; i < timeInterval.TotalMinutes; i+=interval)
+            for (var i = 0; i < timeInterval.TotalMinutes; i += interval)
             {
                 timeInterval.IntervalList.Add(new WaterTime
                 {
@@ -52,10 +53,24 @@ namespace CustomControl.Services
                     line.TimeInterval = TimeIntervalResolver(line.From, line.Until, line.IntervalMinutes);
                 }
             }
+
             //reader.BaseStream.Seek(0, SeekOrigin.Begin);
             //var timeLine2 = (TimeLineCollection)serializer.Deserialize(reader);
             //reader.Close();
             return timeLine?.TimeLines?.ToList();
+        }
+
+        public SwimmingPool SwimLinesTableStructCreator(SwimmingPool pool, int intervalsCount)
+        {
+            for(var i = 0; i < intervalsCount; i++)
+            {
+                var lines = pool.SwimLines.Select(item => item.SwimLineItems
+                        .Select((value, j) => new {j, value}).FirstOrDefault(r => r.value != null && r.j == i)?.value).Where(r => r != null)
+                    .ToList();
+                if (lines.Any())
+                    pool.SwimLinesList.Add(lines);
+            }
+            return pool;
         }
     }
 }

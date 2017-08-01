@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Web.Mvc;
+using CustomControl.Models;
 using CustomControl.Models.ViewModel;
 using CustomControl.Services;
 
@@ -22,15 +23,10 @@ namespace CustomControl.Controllers
             return View("Template", timeLineList);
         }
 
-        public ActionResult SwimmingPoolTablePart(int swimLinesCount, int timeIntervalsCount, int currentSwmPool)
+        public ActionResult SwimmingPoolTablePart(SwimmingPool swimmingPool, int intervalsCount)
         {
-            var poolTablePartModel = new PoolTablePartVm
-            {
-                SwimLinesCount = swimLinesCount,
-                TimeIntervalsCount = timeIntervalsCount,
-                CurrentSwmPool = currentSwmPool
-            };
-            return View("_SwimmingPoolTablePart", poolTablePartModel);
+            swimmingPool = _intervalsService.SwimLinesTableStructCreator(swimmingPool, intervalsCount);
+            return View("_SwimmingPoolTablePart", swimmingPool);
         }
 
         public string XmlTemp()

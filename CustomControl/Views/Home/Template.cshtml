@@ -62,9 +62,10 @@
                         <tbody>
 
                         @{
-                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimLinesCount", swimmingPool.SwimLines.Count }, { "timeIntervalsCount", timeline.TimeInterval.IntervalList.Count }, { "currentSwmPool", i } });
+                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, {"intervalsCount", timeline.TimeInterval.IntervalList.Count} });
                         }
-                        @for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
+
+                        @*@for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
                         {
                             for (var k = 0; k < timeline.TimeInterval.IntervalList.Count && k < swimmingPool.SwimLines[j].SwimLineItems.Count; k++)
                             {
@@ -78,7 +79,7 @@
                                 });
 
                             }
-                        }
+                        }*@
                         </tbody>
                     </table>
                 </div>
@@ -90,13 +91,13 @@
 @section scripts
 {
     <script>
-        @{
+        @*@{
             var sett = new JsonSerializerSettings();
             sett.Culture = CultureInfo.CurrentCulture;
             //sett.
             var json = JsonConvert.SerializeObject(poolTableList.ToArray(), sett);
         }
         //var arrayOfArrays = JSON.parse(Html.Raw(poolTableList).ToString());
-        initToPoolTable("@json");
+        initToPoolTable("@json");*@
     </script>
 }
