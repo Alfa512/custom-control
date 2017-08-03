@@ -18,8 +18,28 @@ table thead tr:first-child th {
 .table-wrapper {
     width: 100%;
     float: left;
+    display: inline;
+}
+
+.table-timeline {
+    width: 160px;
+    margin-left: 10px;
+}
+
+.tb2 {
+    float: left;
+    border-collapse: collapse;
+    display: inline-block;
 }
 
 .tb2 th {
     width: 100px;
+}
+
+.tables-container {
+    display: inline-block;
+    min-width: max-content;
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    margin-right: 50px;
 }

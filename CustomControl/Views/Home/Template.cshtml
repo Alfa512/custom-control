@@ -5,97 +5,82 @@
     var poolTableList = new List<PoolTablePartVm>();
 }
 <h2>@ViewBag.Title</h2>
-@foreach (var timeline in Model)
-{
-
-    <div class="table-wrapper">
-        <div style="width: 160px; float: left;">
-            <table class="table table-bordered table-responsive table-left">
+<div class="tables-container">
+    @foreach (var timeline in Model)
+    {
+        <div class="tb2 table-timeline">
+            <table class="table table-bordered table-responsive">
                 <thead>
-                <tr>
-                    <th>Wasserzeit</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th class="col-md-6">von</th>
-                    <th class="col-md-6">bis</th>
-                </tr>
+                    <tr>
+                        <th>Wasserzeit</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-6">von</th>
+                        <th class="col-md-6">bis</th>
+                    </tr>
                 </thead>
                 <tbody>
 
-                @foreach (var interval in timeline.TimeInterval.IntervalList)
+                    @foreach (var interval in timeline.TimeInterval.IntervalList)
                 {
-                    <tr class="">
-                        <td>@interval.From</td>
-                        <td>@interval.Until</td>
-                    </tr>
-                }
+                        <tr class="">
+                            <td>@interval.From</td>
+                            <td>@interval.Until</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
-        @if (timeline.SwimmingPools.Any())
+        if (timeline.SwimmingPools.Any())
         {
             var i = 0;
 
             foreach (var swimmingPool in timeline.SwimmingPools)
             {
                 i++;
-                <div class="tb2" style="float: left;">
+                <div class="tb2">
                     <table class="table table-bordered table-responsive table-left">
                         <thead>
-                        <tr>
-                            <th colspan="4">Becken - @i</th>
-                            @*<th></th>
+                            <tr>
+                                <th colspan="4">Becken - @i</th>
+                                @*<th></th>
                                     <th></th>
                                     <th></th>*@
-                        </tr>
+                            </tr>
 
-                        <tr>
-                            @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
-                            {
-                                <th class="col">@j</th>
-                            }
-                        </tr>
+                            <tr>
+                                @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
+                                {
+                                    <th class="col">@j</th>
+                                }
+                            </tr>
                         </thead>
                         <tbody>
 
-                        @{
-                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, {"intervalsCount", timeline.TimeInterval.IntervalList.Count} });
-                        }
-
-                        @*@for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
-                        {
-                            for (var k = 0; k < timeline.TimeInterval.IntervalList.Count && k < swimmingPool.SwimLines[j].SwimLineItems.Count; k++)
-                            {
-                                //setToPoolTable(@j, @k, @swimmingPool.SwimLines[j].SwimLineItems[k].Value)
-                                poolTableList.Add(new PoolTablePartVm
-                                {
-                                    CurrentSwmPool = i,
-                                    SwimLinesCount = j,
-                                    TimeIntervalsCount = k,
-                                    Value = swimmingPool.SwimLines[j].SwimLineItems[k].Value
-                                });
-
+                            @{
+                                Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeline.TimeInterval.IntervalList.Count } });
                             }
-                        }*@
+
+                            @*@for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
+                                {
+                                    for (var k = 0; k < timeline.TimeInterval.IntervalList.Count && k < swimmingPool.SwimLines[j].SwimLineItems.Count; k++)
+                                    {
+                                        //setToPoolTable(@j, @k, @swimmingPool.SwimLines[j].SwimLineItems[k].Value)
+                                        poolTableList.Add(new PoolTablePartVm
+                                        {
+                                            CurrentSwmPool = i,
+                                            SwimLinesCount = j,
+                                            TimeIntervalsCount = k,
+                                            Value = swimmingPool.SwimLines[j].SwimLineItems[k].Value
+                                        });
+
+                                    }
+                                }*@
                         </tbody>
                     </table>
                 </div>
-            }
-        }
-    </div>
-
-}
-@section scripts
-{
-    <script>
-        @*@{
-            var sett = new JsonSerializerSettings();
-            sett.Culture = CultureInfo.CurrentCulture;
-            //sett.
-            var json = JsonConvert.SerializeObject(poolTableList.ToArray(), sett);
-        }
-        //var arrayOfArrays = JSON.parse(Html.Raw(poolTableList).ToString());
-        initToPoolTable("@json");*@
-    </script>
-}
+                                        }
+                                    }
+                                }
+</div>
