@@ -3,24 +3,27 @@
 @{
     Layout = null;
 }
-@*@foreach(var swimLineItems in Model.SwimLinesList.Select((value, i) => new { i, value }).OrderByDescending(r => r.i))
-{
-    <tr id="swm-@Model.CurrentSwmPool">
-        @for (var j = 0; j < Model.SwimLinesCount; j++)
-        {
-            <td id="in-@i-sline-@j"></td>
-        }
-    </tr>
-}*@
 
-@foreach(var swimLineItems in Model.SwimLinesList)
-    {
-        <tr>
-        @foreach (var lineItem in swimLineItems)
-        {
-                <td>
-                    @lineItem.Value
-                </td>
-        }
-        </tr>
-    }
+@for (var i = 0; i < Model.TimeIntervals; i++)
+{
+    if (i < Model.SwimLinesList.Count)
+     {
+         <tr>
+             @foreach (var item in Model.SwimLinesList[i])
+             {
+                 <td>
+                     @item.Value
+                 </td>
+             }
+         </tr>
+     }
+     else
+     {
+         <tr>
+             @for (int j = 0; j < Model.SwimLines.Count; j++)
+             {
+                 <td></td>
+             }   
+         </tr>
+     }
+}

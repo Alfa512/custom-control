@@ -204,7 +204,6 @@
     <Content Include="Views\Home\Template.cshtml" />
     <Content Include="Views\Home\XmlTemp.cshtml" />
     <Content Include="Views\Home\_SwimmingPoolTablePart.cshtml" />
-    <Content Include="Views\Home\Template1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

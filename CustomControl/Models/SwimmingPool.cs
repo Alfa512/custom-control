@@ -12,5 +12,6 @@ namespace CustomControl.Models
         public List<SwimLine> SwimLines { get; set; }
 
         public List<List<SwimLineItem>> SwimLinesList { get; set; }
+        public int TimeIntervals { get; set; }
     }
 }

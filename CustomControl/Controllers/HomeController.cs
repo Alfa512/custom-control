@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 using CustomControl.Models;
-using CustomControl.Models.ViewModel;
 using CustomControl.Services;
 
 namespace CustomControl.Controllers
@@ -26,6 +25,7 @@ namespace CustomControl.Controllers
         public ActionResult SwimmingPoolTablePart(SwimmingPool swimmingPool, int intervalsCount)
         {
             swimmingPool = _intervalsService.SwimLinesTableStructCreator(swimmingPool, intervalsCount);
+            swimmingPool.TimeIntervals = intervalsCount;
             return View("_SwimmingPoolTablePart", swimmingPool);
         }
 
