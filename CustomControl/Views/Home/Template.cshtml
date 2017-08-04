@@ -62,21 +62,6 @@
                                 Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeline.TimeInterval.IntervalList.Count } });
                             }
 
-                            @*@for (var j = 0; j < swimmingPool.SwimLines.Count; j++)
-                                {
-                                    for (var k = 0; k < timeline.TimeInterval.IntervalList.Count && k < swimmingPool.SwimLines[j].SwimLineItems.Count; k++)
-                                    {
-                                        //setToPoolTable(@j, @k, @swimmingPool.SwimLines[j].SwimLineItems[k].Value)
-                                        poolTableList.Add(new PoolTablePartVm
-                                        {
-                                            CurrentSwmPool = i,
-                                            SwimLinesCount = j,
-                                            TimeIntervalsCount = k,
-                                            Value = swimmingPool.SwimLines[j].SwimLineItems[k].Value
-                                        });
-
-                                    }
-                                }*@
                         </tbody>
                     </table>
                 </div>

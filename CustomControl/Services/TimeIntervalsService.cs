@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Serialization;
 using CustomControl.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace CustomControl.Services
 {

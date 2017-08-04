@@ -22,7 +22,7 @@ table thead tr:first-child th {
 }
 
 .table-timeline {
-    width: 160px;
+    /*width: 160px;*/
     margin-left: 10px;
 }
 
