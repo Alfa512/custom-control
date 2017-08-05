@@ -76,6 +76,7 @@ textarea {
 .input-item {
     margin-right: 5px;
     float: left;
+    width: auto;
 }
 
 .bfh-timepicker-toggle {
