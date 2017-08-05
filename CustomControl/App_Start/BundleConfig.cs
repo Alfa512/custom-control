@@ -24,11 +24,15 @@ namespace CustomСontrol
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                      "~/Scripts/PoolTableFill.js"));
+                      "~/Scripts/PoolTableFill.js",
+                      "~/Scripts/bootstrap-formhelpers.js",
+                      "~/Scripts/bootstrap-formhelpers-timepicker.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/XmlTemplate.css",
+                      "~/Content/bootstrap-formhelpers.css",
                       "~/Content/site.css"));
         }
     }
