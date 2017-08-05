@@ -25,8 +25,8 @@ namespace CustomСontrol
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                       "~/Scripts/PoolTableFill.js",
-                      "~/Scripts/bootstrap-formhelpers.js",
-                      "~/Scripts/bootstrap-formhelpers-timepicker.js"
+                      "~/Scripts/bootstrap-formhelpers.js"
+                      //"~/Scripts/bootstrap-formhelpers-timepicker.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
