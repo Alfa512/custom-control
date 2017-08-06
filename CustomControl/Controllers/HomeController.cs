@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using CustomControl.Models;
 using CustomControl.Services;
@@ -27,6 +29,25 @@ namespace CustomControl.Controllers
             swimmingPool = _intervalsService.SwimLinesTableStructCreator(swimmingPool, intervalsCount);
             swimmingPool.TimeIntervals = intervalsCount;
             return View("_SwimmingPoolTablePart", swimmingPool);
+        }
+
+        //public ActionResult ResourceTimeline(TimeLine timeLine)
+        //{
+        //    return View("_ResourceTimeline", timeLine);
+        //}
+
+        public ActionResult ResourceSearch(string search)
+        {
+            search = search.Trim().ToLower();
+            var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());//.Select(r => r).Where(r => r.SwimmingPools.All(a => a.Name.Contains(search)));
+            var resultList = new List<TimeLine>();
+            foreach (var timeLine in timeLineList)
+            {
+                timeLine.SwimmingPools = timeLine.SwimmingPools.Where(r => r.Name.ToLower().Contains(search)).ToList();
+                if (timeLine.SwimmingPools.Count > 0)
+                    resultList.Add(timeLine);
+            }
+            return View("_ResourceTimeline", resultList);
         }
 
         public string XmlTemp()

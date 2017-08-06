@@ -1,0 +1,68 @@
+﻿@model List<CustomControl.Models.TimeLine>
+
+@{
+    Layout = null;
+}
+
+@foreach (var timeline in Model)
+{
+    <div class="tb2 table-timeline">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Wasserzeit</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th class="col-md-6">von</th>
+                    <th class="col-md-6">bis</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var interval in timeline.TimeInterval.IntervalList)
+                {
+                    <tr class="">
+                        <td>@interval.From</td>
+                        <td>@interval.Until</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    if (timeline.SwimmingPools.Any())
+    {
+        var i = 0;
+
+        foreach (var swimmingPool in timeline.SwimmingPools)
+        {
+            i++;
+            <div class="tb2">
+                <table class="table table-bordered table-responsive table-left">
+                    <thead>
+                        <tr>
+                            <th colspan="@swimmingPool.SwimLines.Count ?? 1">@swimmingPool.Name</th>
+                            @*<th></th>
+                                <th></th>
+                                <th></th>*@
+                        </tr>
+
+                        <tr>
+                            @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
+                            {
+                                <th class="col">@j</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeline.TimeInterval.IntervalList.Count } });
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+                                }
+                            }
+                            }

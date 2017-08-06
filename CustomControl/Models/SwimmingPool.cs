@@ -7,6 +7,8 @@ namespace CustomControl.Models
     [Serializable]
     public class SwimmingPool
     {
+        [XmlAttribute("name")]
+        public string Name { get; set; }
         //[XmlArray("swimmingpool")]
         [XmlElement("swimlines", typeof(SwimLine))]
         public List<SwimLine> SwimLines { get; set; }

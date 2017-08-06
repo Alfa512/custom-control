@@ -5,84 +5,23 @@
 <h2>@ViewBag.Title</h2>
 <div class="tables-container">
     <div class="row">
-        <div class="col-xs-8 ">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
             <div class="input-group">
 
                 <div id="start-time" class="bfh-timepicker input-item"></div>
                 <div id="end-time" class="bfh-timepicker input-item"></div>
 
-                <input type="hidden" name="search_param" value="all" id="search_param">
-                
+                <input type="hidden" name="search-url" id="search-url" value="@Url.Action("ResourceSearch")">
+
                 <span class="input-group-btn input-item">
-                    <input type="text" class="form-control" name="search" placeholder="Search ...">
+                    <input id="search-in" type="text" class="form-control" name="search" placeholder="Search ...">
                     <button class="btn btn-default " type="button"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
         </div>
     </div>
     <div id="resources">
-        @foreach (var timeline in Model)
-        {
-            <div class="tb2 table-timeline">
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Wasserzeit</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-6">von</th>
-                            <th class="col-md-6">bis</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var interval in timeline.TimeInterval.IntervalList)
-                {
-                            <tr class="">
-                                <td>@interval.From</td>
-                                <td>@interval.Until</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            if (timeline.SwimmingPools.Any())
-            {
-                var i = 0;
-
-                foreach (var swimmingPool in timeline.SwimmingPools)
-                {
-                    i++;
-                    <div class="tb2">
-                        <table class="table table-bordered table-responsive table-left">
-                            <thead>
-                                <tr>
-                                    <th colspan="@swimmingPool.SwimLines.Count ?? 1">Becken - @i</th>
-                                    @*<th></th>
-                                        <th></th>
-                                        <th></th>*@
-                                </tr>
-
-                                <tr>
-                                    @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
-                                    {
-                                        <th class="col">@j</th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @{
-                                    Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeline.TimeInterval.IntervalList.Count } });
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
-                                            }
-                                        }
-                                    }
+        @Html.Partial("_ResourceTimeline", Model)
     </div>
 </div>
 

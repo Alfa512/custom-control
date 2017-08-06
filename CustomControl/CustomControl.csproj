@@ -187,6 +187,7 @@
     <Content Include="Scripts\PoolTableFill.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\search-service.js" />
     <Content Include="Templates\temp.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -207,6 +208,7 @@
     <Content Include="Views\Home\Template.cshtml" />
     <Content Include="Views\Home\XmlTemp.cshtml" />
     <Content Include="Views\Home\_SwimmingPoolTablePart.cshtml" />
+    <Content Include="Views\Home\_ResourceTimeline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
