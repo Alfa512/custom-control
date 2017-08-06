@@ -2,21 +2,31 @@
 $("#search-in").on("change",
     function(e) {
         e.preventDefault();
-        var data = $("#search-in").val();
-        if (data.length < 3)
-            return;
+        
         clearTimeout(delayTimer);
-        var url = $("#search-url").val();
+        
         delayTimer = setTimeout(function () {
-            $.ajax({
-                method: "GET",
-                url: url,
-                data: {
-                    search: data
-                },
-                success: function(html) {
-                    $("#resources").html(html);
-                }
-            });
-        }, 2000);
+            searchResources();
+        }, 1000);
     });
+
+$("#search-btn").click(function() {
+    searchResources();
+});
+
+searchResources = function () {
+    var data = $("#search-in").val();
+    if (data.length < 2)
+        return;
+    var url = $("#search-url").val();
+    $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+            search: data
+        },
+        success: function (html) {
+            $("#resources").html(html);
+        }
+    });
+}
