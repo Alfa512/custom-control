@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using CustomControl.Models;
 using CustomControl.Services;
+using Microsoft.Ajax.Utilities;
 
 namespace CustomControl.Controllers
 {
@@ -36,9 +39,11 @@ namespace CustomControl.Controllers
         //    return View("_ResourceTimeline", timeLine);
         //}
 
-        public ActionResult ResourceSearch(string search)
+        public ActionResult ResourceSearch(string search, string startTime, string endTime)
         {
-            search = search.Trim().ToLower();
+            startTime = !startTime.IsNullOrWhiteSpace() ? startTime.Trim().ToLower() : "";
+            endTime = !endTime.IsNullOrWhiteSpace() ? endTime.Trim().ToLower() : "";
+            search = !search.IsNullOrWhiteSpace() ? search.Trim().ToLower() : "";
             var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());//.Select(r => r).Where(r => r.SwimmingPools.All(a => a.Name.Contains(search)));
             var resultList = new List<TimeLine>();
             foreach (var timeLine in timeLineList)
@@ -46,6 +51,28 @@ namespace CustomControl.Controllers
                 timeLine.SwimmingPools = timeLine.SwimmingPools.Where(r => r.Name.ToLower().Contains(search)).ToList();
                 if (timeLine.SwimmingPools.Count > 0)
                     resultList.Add(timeLine);
+            }
+
+            if (!startTime.IsNullOrWhiteSpace() && startTime.Split(':').Length > 1)
+            {
+                foreach (var timeLine in timeLineList)
+                {
+                    var timeInterval =
+                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) > GetMinutes(startTime)).ToList();
+                    if (timeInterval.Count > 0)
+                        timeLine.TimeInterval.IntervalList = timeInterval;
+                }
+            }
+
+            if (!endTime.IsNullOrWhiteSpace() && endTime.Split(':').Length > 1)
+            {
+                foreach (var timeLine in timeLineList)
+                {
+                    var timeInterval =
+                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) < GetMinutes(endTime)).ToList();
+                    if (timeInterval.Count > 0)
+                        timeLine.TimeInterval.IntervalList = timeInterval;
+                }
             }
             return View("_ResourceTimeline", resultList);
         }
@@ -76,6 +103,15 @@ namespace CustomControl.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public int GetMinutes(string time)
+        {
+            if (time.IsNullOrWhiteSpace() || time.Split(':').Length < 2)
+                return 0;
+            var hours = time.Split(':')[0];
+            var minutes = time.Split(':')[1];
+            return Convert.ToInt32(hours ?? "0") * 60 + Convert.ToInt32(minutes ?? "0");
         }
     }
 }
