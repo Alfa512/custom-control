@@ -1,10 +1,11 @@
 ﻿startTimepicker = $("#start-time").bfhtimepicker();
 endTimepicker = $("#end-time").bfhtimepicker();
 
-//$(".bfh-timepicker").on("mousemove",
-//    function () {
-//        $(this).addClass("open");
-//    });
+$(".bfh-timepicker").on("mousemove",
+    function () {
+        //$(this).addClass("open");
+        $(this).css("cursor", "pointer");
+    });
 
 //$(".bfh-timepicker").on("mouseleave",
 //    function () {
@@ -47,7 +48,7 @@ searchResources = function (start, end) {
 }
 
 startTimepicker.on("change.bfhtimepicker",
-    function (e, data) {
+    function () {
         var stime = $("#start-time input").val();
         var etime = $("#end-time input").val();
         searchResources(stime, etime);

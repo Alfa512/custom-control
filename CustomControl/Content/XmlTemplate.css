@@ -43,3 +43,7 @@ table thead tr:first-child th {
     min-width: -moz-max-content;
     margin-right: 50px;
 }
+
+.template-header {
+    margin-left: 10px;
+}

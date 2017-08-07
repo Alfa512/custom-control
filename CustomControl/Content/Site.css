@@ -45,9 +45,10 @@ textarea {
     margin-bottom: 0;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
     border-radius: 3px;
 }
- 
+
 #custom-search-form button {
     border: 0;
     background: none;
@@ -60,9 +61,10 @@ textarea {
     margin-bottom: 0;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
     border-radius: 3px;
 }
- 
+
 .search-query:focus + button {
     z-index: 3;   
 }
@@ -89,4 +91,12 @@ textarea {
 
 .input-line {
     margin-left: 15px;
+}
+
+.bfh-number {
+    height: 40px;
+}
+
+.bfh-timepicker-popover .separator {
+    padding-top: 12px;
 }
