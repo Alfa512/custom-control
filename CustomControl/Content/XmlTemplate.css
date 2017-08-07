@@ -47,3 +47,7 @@ table thead tr:first-child th {
 .template-header {
     margin-left: 10px;
 }
+
+#search-btn > .glyphicon-search {
+    top: 3px;
+}
