@@ -1,15 +1,15 @@
 ﻿startTimepicker = $("#start-time").bfhtimepicker();
 endTimepicker = $("#end-time").bfhtimepicker();
 
-$(".bfh-timepicker").on("mousemove",
-    function () {
-        $(this).addClass("open");
-    });
+//$(".bfh-timepicker").on("mousemove",
+//    function () {
+//        $(this).addClass("open");
+//    });
 
-$(".bfh-timepicker").on("mouseleave",
-    function () {
-        $(this).removeClass("open");
-    });
+//$(".bfh-timepicker").on("mouseleave",
+//    function () {
+//        $(this).removeClass("open");
+//    });
 
 var delayTimer;
 $("#search-in").on("change",
