@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace CustomControl.Models
 {
     [Serializable]
-    [XmlRoot("timelineColl")]
+    [XmlRoot("timelinecollection")]
     public class TimeLineCollection
     {
         [XmlArray("timelines")]

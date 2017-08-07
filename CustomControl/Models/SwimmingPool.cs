@@ -9,7 +9,6 @@ namespace CustomControl.Models
     {
         [XmlAttribute("name")]
         public string Name { get; set; }
-        //[XmlArray("swimmingpool")]
         [XmlElement("swimlines", typeof(SwimLine))]
         public List<SwimLine> SwimLines { get; set; }
 
