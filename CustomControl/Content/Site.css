@@ -78,11 +78,15 @@ textarea {
     float: left;
     width: auto;
 }
-
+    
 .bfh-timepicker-toggle {
     float: left;
 }
 
 .bfh-timepicker-toggle:first-child {
     height: 20px;
+}
+
+.input-line {
+    margin-left: 15px;
 }
