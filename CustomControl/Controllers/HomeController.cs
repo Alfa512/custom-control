@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using CustomControl.Models;
 using CustomControl.Services;
 using Microsoft.Ajax.Utilities;
+using WebGrease.Css.Extensions;
 
 namespace CustomControl.Controllers
 {
@@ -34,6 +35,13 @@ namespace CustomControl.Controllers
             return View("_SwimmingPoolTablePart", swimmingPool);
         }
 
+        public ActionResult SwimmingPoolTableRender(SwimmingPool swimmingPool, int? intervalsCount)
+        {
+            if (intervalsCount != null && intervalsCount > 0)
+                swimmingPool.TimeIntervals = (int)intervalsCount;
+            return View("_SwimmingPoolTablePart", swimmingPool);
+        }
+
         //public ActionResult ResourceTimeline(TimeLine timeLine)
         //{
         //    return View("_ResourceTimeline", timeLine);
@@ -48,6 +56,7 @@ namespace CustomControl.Controllers
             var resultList = new List<TimeLine>();
             foreach (var timeLine in timeLineList)
             {
+                timeLine.SwimmingPools.ForEach(r => _intervalsService.SwimLinesTableStructCreator(r, r.TimeIntervals));
                 timeLine.SwimmingPools = timeLine.SwimmingPools.Where(r => r.Name.ToLower().Contains(search)).ToList();
                 if (timeLine.SwimmingPools.Count > 0)
                     resultList.Add(timeLine);
@@ -61,6 +70,10 @@ namespace CustomControl.Controllers
                         timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) > GetMinutes(startTime)).ToList();
                     if (timeInterval.Count > 0)
                         timeLine.TimeInterval.IntervalList = timeInterval;
+                    timeLine.SwimmingPools.ForEach(r =>
+                    {
+                        r.SwimLinesList.RemoveRange(0, r.SwimLinesList.Count - timeInterval.Count);
+                    });
                 }
             }
 
@@ -72,6 +85,10 @@ namespace CustomControl.Controllers
                         timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) < GetMinutes(endTime)).ToList();
                     if (timeInterval.Count > 0)
                         timeLine.TimeInterval.IntervalList = timeInterval;
+                    timeLine.SwimmingPools.ForEach(r =>
+                    {
+                        r.SwimLinesList.RemoveRange(timeInterval.Count, r.SwimLinesList.Count - timeInterval.Count);
+                    });
                 }
             }
             return View("_ResourceTimeline", resultList);

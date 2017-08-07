@@ -49,6 +49,7 @@ namespace CustomControl.Services
                 foreach (var line in timeLine.TimeLines)
                 {
                     line.TimeInterval = TimeIntervalResolver(line.From, line.Until, line.IntervalMinutes);
+                    line.SwimmingPools.ForEach(r => r.TimeIntervals = line.TimeInterval.IntervalList.Count);
                 }
             }
 
