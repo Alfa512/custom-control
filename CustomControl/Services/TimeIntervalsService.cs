@@ -69,18 +69,7 @@ namespace CustomControl.Services
                         ?.value)
                     .Where(r => r != null)
                     .ToList());
-                //if (lines.Any())
-                //    pool.SwimLinesList.Add(lines);
             }
-
-
-            //var tempList = new List<List<SwimLineItem>>();
-            //tempList.AddRange(pool.SwimLines.Select(item => item.SwimLineItems));
-            //pool.SwimLinesList = tempList
-            //    .SelectMany(inner => inner.Select((item, index) => new { item, index }).ToList())
-            //    .GroupBy(i => i.index, i => i.item)
-            //    .Select(g => g.ToList())
-            //    .ToList();
 
             return pool;
         }

@@ -3,14 +3,9 @@ endTimepicker = $("#end-time").bfhtimepicker();
 
 $(".bfh-timepicker").on("mousemove",
     function () {
-        //$(this).addClass("open");
         $(this).css("cursor", "pointer");
     });
 
-//$(".bfh-timepicker").on("mouseleave",
-//    function () {
-//        $(this).removeClass("open");
-//    });
 
 var delayTimer;
 $("#search-in").on("change",
@@ -26,8 +21,10 @@ $("#search-in").on("change",
         }, 1000);
     });
 
-$("#search-btn").click(function() {
-    searchResources();
+$("#search-btn").click(function () {
+    var stime = $("#start-time input").val();
+    var etime = $("#end-time input").val();
+    searchResources(stime, etime);
 });
 
 searchResources = function (start, end) {
@@ -47,16 +44,16 @@ searchResources = function (start, end) {
     });
 }
 
-startTimepicker.on("change.bfhtimepicker",
-    function () {
-        var stime = $("#start-time input").val();
-        var etime = $("#end-time input").val();
-        searchResources(stime, etime);
-    });
+//startTimepicker.on("change.bfhtimepicker",
+//    function () {
+//        var stime = $("#start-time input").val();
+//        var etime = $("#end-time input").val();
+//        searchResources(stime, etime);
+//    });
 
-endTimepicker.on("change.bfhtimepicker",
-    function () {
-        var stime = $("#start-time input").val();
-        var etime = $("#end-time input").val();
-        searchResources(stime, etime);
-    });
+//endTimepicker.on("change.bfhtimepicker",
+//    function () {
+//        var stime = $("#start-time input").val();
+//        var etime = $("#end-time input").val();
+//        searchResources(stime, etime);
+//    });

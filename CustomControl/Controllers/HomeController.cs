@@ -19,8 +19,6 @@ namespace CustomControl.Controllers
 
         public ActionResult Index()
         {
-            //var v = XmlTemp();
-            //var sReader = new StreamReader(Server.MapPath("~/App_Data/temp.xml"));
             var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());
 
             return View("Template", timeLineList);
@@ -39,11 +37,6 @@ namespace CustomControl.Controllers
                 swimmingPool.TimeIntervals = (int)intervalsCount;
             return View("_SwimmingPoolTablePart", swimmingPool);
         }
-
-        //public ActionResult ResourceTimeline(TimeLine timeLine)
-        //{
-        //    return View("_ResourceTimeline", timeLine);
-        //}
 
         public ActionResult ResourceSearch(string search, string startTime, string endTime)
         {
