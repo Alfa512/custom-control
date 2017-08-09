@@ -64,14 +64,19 @@ namespace CustomControl.Services
             for (var i = 0; i < intervalsCount; i++)
             {
                 pool.SwimLinesList.Add(pool.SwimLines.Select(item => item.SwimLineItems
-                        .Select((value, j) => new {j, value})
+                        .Select((value, j) => new { j, value })
                         .FirstOrDefault(r => r.value != null && r.j == i)
                         ?.value)
                     .Where(r => r != null)
                     .ToList());
+                if (pool.SwimLinesList[i].Count >= pool.SwimLines.Count) continue;
+
+                pool.SwimLinesList[i].AddRange(Enumerable.Repeat(new SwimLineItem(), pool.SwimLines.Count - pool.SwimLinesList[i].Count));
             }
 
             return pool;
         }
+
+
     }
 }

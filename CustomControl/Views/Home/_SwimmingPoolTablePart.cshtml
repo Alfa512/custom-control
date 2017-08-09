@@ -9,13 +9,6 @@
     if (i < Model.SwimLinesList.Count)
     {
         <tr>
-            @if (Model.SwimLinesList[i].Count < Model.SwimLines.Count)
-            {
-                for (var j = 0; j < Model.SwimLines.Count - Model.SwimLinesList[i].Count; j++)
-                {
-                    <td></td>
-                }
-            }
             @foreach (var item in Model.SwimLinesList[i])
             {
 

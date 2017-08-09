@@ -11,7 +11,8 @@ namespace CustomControl.Controllers
 {
     public class HomeController : Controller
     {
-        private TimeIntervalsService _intervalsService;
+        private readonly TimeIntervalsService _intervalsService;
+
         public HomeController()
         {
             _intervalsService = new TimeIntervalsService();
@@ -34,7 +35,7 @@ namespace CustomControl.Controllers
         public ActionResult SwimmingPoolTableRender(SwimmingPool swimmingPool, int? intervalsCount)
         {
             if (intervalsCount != null && intervalsCount > 0)
-                swimmingPool.TimeIntervals = (int)intervalsCount;
+                swimmingPool.TimeIntervals = (int) intervalsCount;
             return View("_SwimmingPoolTablePart", swimmingPool);
         }
 
@@ -43,7 +44,7 @@ namespace CustomControl.Controllers
             startTime = !startTime.IsNullOrWhiteSpace() ? startTime.Trim().ToLower() : "";
             endTime = !endTime.IsNullOrWhiteSpace() ? endTime.Trim().ToLower() : "";
             search = !search.IsNullOrWhiteSpace() ? search.Trim().ToLower() : "";
-            var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());//.Select(r => r).Where(r => r.SwimmingPools.All(a => a.Name.Contains(search)));
+            var timeLineList = _intervalsService.TimeLineSerializer(XmlTemp());
             var resultList = new List<TimeLine>();
             foreach (var timeLine in timeLineList)
             {
@@ -58,7 +59,8 @@ namespace CustomControl.Controllers
                 foreach (var timeLine in timeLineList)
                 {
                     var timeInterval =
-                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) > GetMinutes(startTime)).ToList();
+                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) > GetMinutes(startTime))
+                            .ToList();
                     if (timeInterval.Count > 0)
                         timeLine.TimeInterval.IntervalList = timeInterval;
                     timeLine.SwimmingPools.ForEach(r =>
@@ -73,7 +75,8 @@ namespace CustomControl.Controllers
                 foreach (var timeLine in timeLineList)
                 {
                     var timeInterval =
-                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) < GetMinutes(endTime)).ToList();
+                        timeLine.TimeInterval.IntervalList.Where(r => GetMinutes(r.From) < GetMinutes(endTime))
+                            .ToList();
                     if (timeInterval.Count > 0)
                         timeLine.TimeInterval.IntervalList = timeInterval;
                     timeLine.SwimmingPools.ForEach(r =>

@@ -6,6 +6,12 @@ namespace CustomControl.Models
     [Serializable]
     public class SwimLineItem
     {
+        public SwimLineItem()
+        {
+            Name = "";
+            Value = "";
+        }
+
         [XmlAttribute("name")]
         public string Name { get; set; }
         [XmlAttribute("value")]
