@@ -16,5 +16,9 @@ namespace CustomControl.Models
         public string Name { get; set; }
         [XmlAttribute("value")]
         public string Value { get; set; }
+        [XmlAttribute("from")]
+        public string From { get; set; }
+        [XmlAttribute("until")]
+        public string Until { get; set; }
     }
 }

@@ -32,31 +32,19 @@ namespace CustomControl.Services
 
         public List<TimeLine> TimeLineSerializer(string text)
         {
-            const string path = "C:\\Source\\custom-control\\CustomControl\\Templates\\temp.xml";
 
-            var xRoot = new XmlRootAttribute();
-            xRoot.ElementName = "timelines";
-            xRoot.IsNullable = false;
+	        var serializer = new XmlSerializer(typeof(TimeLineCollection));
 
-            var serializer = new XmlSerializer(typeof(TimeLineCollection));
-
-            //var reader = sReader;//new StreamReader(path);
             var textReader = new StringReader(text);
-            //reader.BaseStream.Seek(0, SeekOrigin.Begin);
             var timeLine = (TimeLineCollection)serializer.Deserialize(textReader);
-            if (timeLine?.TimeLines != null && timeLine.TimeLines.Any())
-            {
-                foreach (var line in timeLine.TimeLines)
-                {
-                    line.TimeInterval = TimeIntervalResolver(line.From, line.Until, line.IntervalMinutes);
-                    line.SwimmingPools.ForEach(r => r.TimeIntervals = line.TimeInterval.IntervalList.Count);
-                }
-            }
+	        if (timeLine?.TimeLines == null || !timeLine.TimeLines.Any()) return timeLine?.TimeLines?.ToList();
+	        foreach (var line in timeLine.TimeLines)
+	        {
+		        line.TimeInterval = TimeIntervalResolver(line.From, line.Until, line.IntervalMinutes);
+		        line.SwimmingPools.ForEach(r => r.TimeIntervals = line.TimeInterval.IntervalList.Count);
+	        }
 
-            //reader.BaseStream.Seek(0, SeekOrigin.Begin);
-            //var timeLine2 = (TimeLineCollection)serializer.Deserialize(reader);
-            //reader.Close();
-            return timeLine?.TimeLines?.ToList();
+	        return timeLine.TimeLines?.ToList();
         }
 
         public SwimmingPool SwimLinesTableStructCreator(SwimmingPool pool, int intervalsCount)

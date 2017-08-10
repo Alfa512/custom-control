@@ -43,17 +43,3 @@ searchResources = function (start, end) {
         }
     });
 }
-
-//startTimepicker.on("change.bfhtimepicker",
-//    function () {
-//        var stime = $("#start-time input").val();
-//        var etime = $("#end-time input").val();
-//        searchResources(stime, etime);
-//    });
-
-//endTimepicker.on("change.bfhtimepicker",
-//    function () {
-//        var stime = $("#start-time input").val();
-//        var etime = $("#end-time input").val();
-//        searchResources(stime, etime);
-//    });

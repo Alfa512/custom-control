@@ -23,9 +23,7 @@ namespace CustomControl
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                      "~/Scripts/PoolTableFill.js",
                       "~/Scripts/bootstrap-formhelpers.js",
-                      //"~/Scripts/bootstrap-formhelpers-timepicker.js",
                       "~/Scripts/search-service.js"
                       ));
 
