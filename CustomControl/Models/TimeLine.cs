@@ -10,7 +10,7 @@ namespace CustomControl.Models
         [XmlAttribute("from")]
         public string From { get; set; }
         [XmlAttribute("until")]
-        public string Until { get; set; }   
+        public string Until { get; set; }
         [XmlAttribute("intervalMinutes")]
         public int IntervalMinutes { get; set; }
         [XmlElement("swimmingpool", typeof(SwimmingPool))]

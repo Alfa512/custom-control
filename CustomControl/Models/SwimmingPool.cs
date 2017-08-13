@@ -9,6 +9,8 @@ namespace CustomControl.Models
     {
         [XmlAttribute("name")]
         public string Name { get; set; }
+        [XmlElement("poolschedule", typeof(TimeInterval))]
+        public TimeInterval PoolSchedule { get; set; }
         [XmlElement("swimlines", typeof(SwimLine))]
         public List<SwimLine> SwimLines { get; set; }
 

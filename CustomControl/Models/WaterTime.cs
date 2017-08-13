@@ -1,8 +1,14 @@
-﻿namespace CustomControl.Models
+﻿using System;
+using System.Xml.Serialization;
+
+namespace CustomControl.Models
 {
+	[Serializable]
     public class WaterTime
     {
-        public string From { get; set; }
-        public string Until { get; set; }
+	    [XmlAttribute("from")]
+		public string From { get; set; }
+	    [XmlAttribute("to")]
+		public string To { get; set; }
     }
 }

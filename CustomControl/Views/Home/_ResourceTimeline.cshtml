@@ -1,39 +1,46 @@
-﻿@model List<CustomControl.Models.TimeLine>
+﻿@using CustomControl.Models
+@model List<TimeLine>
 
 @{
     Layout = null;
+    var timeInterval = new TimeInterval();
 }
 
 @foreach (var timeline in Model)
 {
-    <div class="tb2 table-timeline">
-        <table class="table table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th>Wasserzeit</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th class="col-md-6">von</th>
-                    <th class="col-md-6">bis</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var interval in timeline.TimeInterval.IntervalList)
-                {
-                    <tr class="">
-                        <td>@interval.From</td>
-                        <td>@interval.Until</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+    timeInterval = timeline.TimeInterval;
     if (timeline.SwimmingPools.Any())
     {
         foreach (var swimmingPool in timeline.SwimmingPools)
         {
+            timeInterval = swimmingPool.PoolSchedule ?? timeInterval;
+
+            if (timeInterval.Intervals.Any())
+            {
+                <div class="tb2 table-timeline">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Wasserzeit</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="col-md-6">von</th>
+                                <th class="col-md-6">bis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var interval in timeInterval.Intervals)
+                            {
+                                <tr class="">
+                                    <td>@interval.From</td>
+                                    <td>@interval.To</td>
+                                </tr>
+}
+                        </tbody>
+                    </table>
+                </div>
+}
             <div class="tb2">
                 <table class="table table-bordered table-responsive table-left">
                     <thead>
@@ -45,18 +52,16 @@
                             @for (var j = 1; j <= swimmingPool.SwimLines.Count; j++)
                             {
                                 <th class="col">@j</th>
-                            }
+}
                         </tr>
                     </thead>
                     <tbody>
 
-                        @{
-                            Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeline.TimeInterval.IntervalList.Count } });
+                        @{    Html.RenderAction("SwimmingPoolTablePart", new RouteValueDictionary { { "swimmingPool", swimmingPool }, { "intervalsCount", timeInterval.Intervals.Count } });
                         }
 
                     </tbody>
                 </table>
-            </div>
-                                    }
+            </div>         }
                                 }
                             }
